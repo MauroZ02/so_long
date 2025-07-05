@@ -33,7 +33,8 @@ char	**read_map(char** argv, t_map *var_map)
 	
 	count_line = 0;
 	i = ft_strlen(argv[1]);
-	if (argv[1][i-1] == 'r' && argv[1][i-2] == 'e' && argv[1][i-3] == 'b' && argv[1][i-4] == '.' && i > 4)
+	if (argv[1][i-1] == 'r' && argv[1][i-2] == 'e' && argv[1][i-3] == 'b' &&
+		argv[1][i-4] == '.' && i > 4)
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)

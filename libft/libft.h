@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:06:54 by mzangaro          #+#    #+#             */
-/*   Updated: 2024/10/15 13:03:32 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/05 21:13:25 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+
+# define BUFFER_SIZE 42
+
+# define HEX_LOW_BASE "0123456789abcdef"
+# define HEX_UPP_BASE "0123456789ABCDEF"
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -51,4 +56,26 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+
+char	*get_next_line(int fd);
+char	*next_line(char *buffer);
+char	*extract_line(char *buffer);
+char	*read_till_nl(int fd, char *rest);
+char	*ft_strjoin_gnl(char const *s1, char const *s2);
+void	*ft_calloc_gnl(size_t n, size_t size);
+size_t	ft_strlen_gnl(const char *s);
+size_t	ft_strlcat_gnl(char *dst, const char *src, size_t size);
+size_t	ft_strlcpy_gnl(char *dest, char *src, size_t size);
+char	*ft_strchr_gnl(const char *s, int c);
+
+int		print_char(int c);
+int		print_str(char *str);
+int		print_format(char specifier, va_list args);
+int		ft_printf(const char *format, ...);
+int		print_dec(int n);
+int		print_hex(unsigned int n, const char *symbols);
+int		print_long(unsigned long n, const char *symbols);
+int		print_unsigned(unsigned int n);
+int		print_ptr(void *n, const char *symbols);
+
 #endif

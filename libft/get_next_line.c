@@ -6,13 +6,13 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:06:59 by mzangaro          #+#    #+#             */
-/*   Updated: 2024/11/18 19:40:32 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/05 20:18:32 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_gnl(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -28,11 +28,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	while (s2[j] != '\0')
 		j++;
-	join = ft_calloc(i + j + 1, sizeof(char));
+	join = ft_calloc_gnl(i + j + 1, sizeof(char));
 	if (!join)
 		return (NULL);
-	ft_strlcpy(join, (char *)s1, i + 1);
-	ft_strlcat(join, s2, i + j + 1);
+	ft_strlcpy_gnl(join, (char *)s1, i + 1);
+	ft_strlcat_gnl(join, s2, i + j + 1);
 	return (join);
 }
 
@@ -42,11 +42,11 @@ char	*read_till_nl(int fd, char *rest)
 	char	*new_rest;
 	int		bytes_read;
 
-	temp_buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	temp_buffer = ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 	if (!temp_buffer)
 		return (NULL);
 	bytes_read = 1;
-	while (!ft_strchr(rest, '\n') && bytes_read > 0)
+	while (!ft_strchr_gnl(rest, '\n') && bytes_read > 0)
 	{
 		bytes_read = read(fd, temp_buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
@@ -57,7 +57,7 @@ char	*read_till_nl(int fd, char *rest)
 			return (rest);
 		}
 		temp_buffer[bytes_read] = '\0';
-		new_rest = ft_strjoin(rest, temp_buffer);
+		new_rest = ft_strjoin_gnl(rest, temp_buffer);
 		free(rest);
 		rest = new_rest;
 	}
@@ -76,9 +76,9 @@ char	*extract_line(char *buffer)
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
-		line = ft_calloc(i + 2, sizeof(char));
+		line = ft_calloc_gnl(i + 2, sizeof(char));
 	else
-		line = ft_calloc(i + 1, sizeof(char));
+		line = ft_calloc_gnl(i + 1, sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -107,7 +107,7 @@ char	*next_line(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	new_buffer = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+	new_buffer = ft_calloc_gnl((ft_strlen_gnl(buffer) - i + 1), sizeof(char));
 	if (!new_buffer)
 	{
 		free(buffer);

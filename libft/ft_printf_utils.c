@@ -6,11 +6,11 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 20:10:47 by mzangaro          #+#    #+#             */
-/*   Updated: 2024/12/08 20:30:25 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/05 20:10:30 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 int	print_dec(int n)
 {
