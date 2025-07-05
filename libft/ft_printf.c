@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 20:10:41 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/05 21:10:17 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/05 22:33:08 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,21 +125,21 @@ int	ft_printf(const char *format, ...)
 // 	// ft_printf("Test 2:\n");
 // 	// count = ft_printf(" %p ", -1);
 // 	// ft_printf("\nThe chars written are %d", count);
-	
+
 // 	// count = printf(" %p ", -1);
 // 	// printf("\nThe chars written are %d", count);
 
 // 	// ft_printf("\nTest 3:\n");
 // 	// count = ft_printf(" %p ", 15);
 // 	// ft_printf("\nThe chars written are %d", count);
-	
+
 // 	// count = printf(" %p ", 15);
 // 	// printf("\nThe chars written are %d", count);
 
 // 	/*ft_printf("\nTest 8:\n");
 // 	count = ft_printf(" %p ", 9223372036854775808);
 // 	ft_printf("\nThe chars written are %d", count);
-	
+
 // 	count = printf(" %p ", 9223372036854775808);
 // 	printf("\nThe chars written are %d", count);*/
 // }
