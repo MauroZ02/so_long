@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:58 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/05 22:32:01 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/05 22:53:14 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@
 
 typedef struct map
 {
-	char **map;
-	char **map_copy;
-} t_map;
-
+	char	**map;
+	char	**map_copy;
+}	t_map;
 
 #endif
