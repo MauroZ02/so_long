@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/05 22:51:03 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:17:44 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ int	validate_map(char **argv, t_map *var_map)
 			j++;
 		if (var_map->map[i][j] != 1)
 			return (NULL);
+		i++;
+		j = 0;
+		while (var_map->map[i][j] == 1)
+			i++;
+		while (var_map->map);
 	}
 }
 
