@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 16:06:54 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/05 21:13:25 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:42:19 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdarg.h>
 
 # define BUFFER_SIZE 42
 
