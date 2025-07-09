@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 18:47:21 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/08 19:45:53 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:48:30 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ int	main(void)
 	mlx_key_hook(win, handle_esc, NULL); // cuando en al win se toque una tecla llama a handle_esc.
 	mlx_hook(win, 17, 0, handle_exit, NULL); //hook dice "cuando ocurra algo llama a: funcion" - cuando en la win se toque la X (17) llama a handle_exit
 	mlx_loop(mlx);
+	mlx_xpm_file_to_image();
 }
