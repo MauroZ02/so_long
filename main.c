@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/08 18:40:05 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/15 19:05:06 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,30 @@ int	validate_map(t_map *var_map)
 
 int	main(int argc, char **argv)
 {
-	t_map *var_map;
+	int		y;
+	int		x;
+	t_map	*var_map;
+
+	y = 0;
+	x = 0;
+	while (var_map->map_copy[y][x])
+	{
+		while (var_map->map_copy[y])
+		{
+			if (var_map->map_copy[y][x] == "1")
+				var_map->map_copy[y][x] = wall_img;
+			if (var_map->map_copy[y][x] == "0")
+				var_map->map_copy[y][x] = floor_img;
+			if (var_map->map_copy[y][x] == "P")
+				var_map->map_copy[y][x] = char_img;
+			if (var_map->map_copy[y][x] == "C")
+				var_map->map_copy[y][x] = box_img;
+			if (var_map->map_copy[y][x] == "E")
+				var_map->map_copy[y][x] = exit_img;
+			x++;
+		}
+		y++;
+	}
 
 	var_map = ft_calloc(1, sizeof(t_map));
 
