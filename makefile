@@ -10,6 +10,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -I/usr/include -I$(MLX_PATH)
 
 SRC = main.c\
+	  render.c\
+	  graphics.c\
 
 OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
