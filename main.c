@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/16 19:16:00 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/21 21:58:25 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,23 @@ char	**aux_readmap(int count_line, char **argv, t_map *var_map)
 	int	i;
 
 	i = 0;
-	var_map->map = ft_calloc(count_line + 1, sizeof(char *));//calloc para poner \n y sizeof char * porque es un string
-	//var_map->map_copy = ft_calloc(count_line + 1, sizeof(char*));
+	var_map->map = ft_calloc(count_line + 1, sizeof(char *));
+	var_map->map_copy = ft_calloc(count_line + 1, sizeof(char *));
 	if (!var_map->map)
-	return (NULL);
+		return (NULL);
 	fd = open(argv[1], O_RDONLY);
-	if( fd < 0)
-	return (NULL); //hay que liberar la memoria reservada (ft_free)$
+	if (fd < 0)
+		return (NULL); //hay que liberar la memoria reservada (ft_free)$
 	var_map->map[i] = get_next_line(fd);
-	while(var_map->map[i])
+	while (var_map->map[i])
 	{
 		i++;
 		var_map->map[i] = get_next_line(fd);
 		/*if(var_map->map[i][0] == '\n')
 		return (NULL);//hay que liberar la memoria reservada*/
 	}
-	return(var_map->map);
+	var_map->map_copy = var_map->map;
+	return (var_map->map);
 }
 
 char	**read_map(char **argv, t_map *var_map)
@@ -77,7 +78,6 @@ void	printmap(t_map *var_map)
 			ft_printf("%c", var_map->map_copy[y][x]);
 			x++;
 		}
-		//ft_printf("\n");
 		x = 0;
 		y++;
 	}
@@ -106,19 +106,23 @@ int	validate_map(t_map *var_map)
 
 int	main(int argc, char **argv)
 {
-	t_map	*var_map;
+	t_map		*var_map;
+	t_sprites	*sprites;
 
 	var_map = ft_calloc(1, sizeof(t_map));
-	if(argc != 2)
-		return(1);
+	sprites = ft_calloc(1, sizeof(t_sprites));
 
+	if (argc != 2)
+		return (1);
 	var_map->map_copy = read_map(argv, var_map);
-	if(argc != 2)
-		return(1); //como el .ber tiene que ser el primer arg nos percatamos 1º
+	if (argc != 2)
+		return (1); //como el .ber tiene que ser el primer arg nos percatamos 1º
 	// if (!validate_map(var_map))
 	// 	return(printf("Error\n"));
 	printmap(var_map);
-	run_mlx(var_map);
-
-	return(0);
+	win_size(var_map);
+	run_mlx(var_map, sprites);
+	free(var_map);
+	free(sprites);
+	return (0);
 }
