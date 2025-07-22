@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/22 21:57:46 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/22 22:11:52 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,35 @@ void	printmap(t_map *var_map)
 
 int	check_walls(t_map *var_map)
 {
-	int	x;
-	int	y;
-	int	width;
-	int	height;
+	int x;
+	int y;
+	int width;
+	int height;
 
+	width = (int)ft_strlen(var_map->map[0]);
 	x = 0;
-	y = 0;
-	width = (int)ft_strlen(var_map->map[y]);
-	while (var_map->map[y])
+	while (x < width)
 	{
-		while (var_map->map[0][x] == '1')
-			x++;
 		if (var_map->map[0][x] != '1')
 			return (0);
-		y++;
-		if (var_map->map[y][0] != '1' && var_map->map[y][ft_strlen(var_map->map[y]) - 1] != '1')
+		x++;
+	}
+	y = 1;
+	while (var_map->map[y] != NULL && var_map->map[y] != var_map->map[height + 1])
+	{
+		// if (var_map->map[y + 1] == NULL)
+		// 	break;
+		if (var_map->map[y][0] != '1' || var_map->map[y][width - 1] != '1')
 			return (0);
-		x = 0;
-		while (var_map->map[height][x] == '1')
-			x++;
+		y++;
+	}
+	height = y;
+	x = 0;
+	while (x < width)
+	{
 		if (var_map->map[height][x] != '1')
 		return (0);
+		x++;
 	}
 	return (1);
 }
