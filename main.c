@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/21 21:58:25 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/21 22:50:57 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,41 @@ void	printmap(t_map *var_map)
 	return ;
 }
 
+int	check_walls(t_map *var_map)
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+
+	x = 0;
+	y = 0;
+	width = (int)ft_strlen(var_map->map[y]);
+	while (var_map->map[y])
+	{
+		while (var_map->map[0][x] == '1')
+			x++;
+		y++;
+		x = 0;
+		if (var_map->map[y][x] == '1')
+			x++;
+		if (var_map->map[y][width - 1] != '1')
+			return (NULL);
+		if (var_map->map[height][x] == '1') //falta height
+			x++;
+	}
+	return (0);
+}
+
 int	validate_map(t_map *var_map)
 {
 	int		y;
 	size_t	gen_len;
-	//int	x;
-	//x = 0;
+	
 	y = 0;
 	gen_len = ft_strlen(var_map->map[0]);
 	while (var_map->map[y])
 	{
-		printf("Línea %d tiene largo %zu, se esperaba %zu\n",
-			y, ft_strlen(var_map->map[y]), gen_len);
 		if (ft_strlen(var_map->map[y]) != gen_len)
 			return (0);
 		y++;
