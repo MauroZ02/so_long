@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/21 22:50:57 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/22 21:57:46 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,28 +99,32 @@ int	check_walls(t_map *var_map)
 	{
 		while (var_map->map[0][x] == '1')
 			x++;
+		if (var_map->map[0][x] != '1')
+			return (0);
 		y++;
+		if (var_map->map[y][0] != '1' && var_map->map[y][ft_strlen(var_map->map[y]) - 1] != '1')
+			return (0);
 		x = 0;
-		if (var_map->map[y][x] == '1')
+		while (var_map->map[height][x] == '1')
 			x++;
-		if (var_map->map[y][width - 1] != '1')
-			return (NULL);
-		if (var_map->map[height][x] == '1') //falta height
-			x++;
+		if (var_map->map[height][x] != '1')
+		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	validate_map(t_map *var_map)
 {
 	int		y;
 	size_t	gen_len;
-	
+
 	y = 0;
-	gen_len = ft_strlen(var_map->map[0]);
+	if (!var_map->map[0])
+		return (0);
+	gen_len = ft_strlen(var_map->map[0] - 1);
 	while (var_map->map[y])
 	{
-		if (ft_strlen(var_map->map[y]) != gen_len)
+		if (ft_strlen(var_map->map[y] - 1) != gen_len)
 			return (0);
 		y++;
 	}
@@ -140,8 +144,10 @@ int	main(int argc, char **argv)
 	var_map->map_copy = read_map(argv, var_map);
 	if (argc != 2)
 		return (1); //como el .ber tiene que ser el primer arg nos percatamos 1º
-	// if (!validate_map(var_map))
-	// 	return(printf("Error\n"));
+	if (!validate_map(var_map))
+		return (ft_printf("Error validating map\n"));
+	if (!check_walls(var_map))
+		return (ft_printf("Error checking walls\n"));
 	printmap(var_map);
 	win_size(var_map);
 	run_mlx(var_map, sprites);
@@ -149,3 +155,20 @@ int	main(int argc, char **argv)
 	free(sprites);
 	return (0);
 }
+
+// int main(int argc, char **argv)
+// {
+//     t_map   var_map;
+//     int     ret;
+
+//     if (argc != 2)
+//         return (1);
+//     var_map.map_copy = read_map(argv, &var_map);
+//     if (!var_map.map_copy)
+//         return (1);
+//     win_size(&var_map);                     // compute width/height
+//     ret = check_walls(&var_map);            // call it!
+//     ft_printf("check_walls returned: %d\n", ret);
+//     /* free your map here if you like */
+//     return (0);
+// }
