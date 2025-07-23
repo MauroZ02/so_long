@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/22 22:11:52 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/23 22:24:30 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 char	**aux_readmap(int count_line, char **argv, t_map *var_map)
 {
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
+	char	*line;
+	size_t	len;
 
 	i = 0;
 	var_map->map = ft_calloc(count_line + 1, sizeof(char *));
@@ -25,14 +27,16 @@ char	**aux_readmap(int count_line, char **argv, t_map *var_map)
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (NULL); //hay que liberar la memoria reservada (ft_free)$
-	var_map->map[i] = get_next_line(fd);
-	while (var_map->map[i])
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		i++;
-		var_map->map[i] = get_next_line(fd);
-		/*if(var_map->map[i][0] == '\n')
-		return (NULL);//hay que liberar la memoria reservada*/
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+		var_map->map[i++] = line ;
+		// if(var_map->map[i][0] == '\n')
+		// return (NULL);//hay que liberar la memoria reservada
 	}
+	var_map->map[i] = NULL;
 	var_map->map_copy = var_map->map;
 	return (var_map->map);
 }
@@ -69,73 +73,19 @@ void	printmap(t_map *var_map)
 	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
 	while (var_map->map_copy[y])
 	{
+		x = 0;
 		while (var_map->map_copy[y][x])
 		{
 			ft_printf("%c", var_map->map_copy[y][x]);
 			x++;
 		}
-		x = 0;
+		ft_printf("\n");
 		y++;
 	}
-	ft_printf("\n");
 	return ;
-}
-
-int	check_walls(t_map *var_map)
-{
-	int x;
-	int y;
-	int width;
-	int height;
-
-	width = (int)ft_strlen(var_map->map[0]);
-	x = 0;
-	while (x < width)
-	{
-		if (var_map->map[0][x] != '1')
-			return (0);
-		x++;
-	}
-	y = 1;
-	while (var_map->map[y] != NULL && var_map->map[y] != var_map->map[height + 1])
-	{
-		// if (var_map->map[y + 1] == NULL)
-		// 	break;
-		if (var_map->map[y][0] != '1' || var_map->map[y][width - 1] != '1')
-			return (0);
-		y++;
-	}
-	height = y;
-	x = 0;
-	while (x < width)
-	{
-		if (var_map->map[height][x] != '1')
-		return (0);
-		x++;
-	}
-	return (1);
-}
-
-int	validate_map(t_map *var_map)
-{
-	int		y;
-	size_t	gen_len;
-
-	y = 0;
-	if (!var_map->map[0])
-		return (0);
-	gen_len = ft_strlen(var_map->map[0] - 1);
-	while (var_map->map[y])
-	{
-		if (ft_strlen(var_map->map[y] - 1) != gen_len)
-			return (0);
-		y++;
-	}
-	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -153,6 +103,7 @@ int	main(int argc, char **argv)
 		return (1); //como el .ber tiene que ser el primer arg nos percatamos 1º
 	if (!validate_map(var_map))
 		return (ft_printf("Error validating map\n"));
+
 	if (!check_walls(var_map))
 		return (ft_printf("Error checking walls\n"));
 	printmap(var_map);
@@ -162,20 +113,3 @@ int	main(int argc, char **argv)
 	free(sprites);
 	return (0);
 }
-
-// int main(int argc, char **argv)
-// {
-//     t_map   var_map;
-//     int     ret;
-
-//     if (argc != 2)
-//         return (1);
-//     var_map.map_copy = read_map(argv, &var_map);
-//     if (!var_map.map_copy)
-//         return (1);
-//     win_size(&var_map);                     // compute width/height
-//     ret = check_walls(&var_map);            // call it!
-//     ft_printf("check_walls returned: %d\n", ret);
-//     /* free your map here if you like */
-//     return (0);
-// }

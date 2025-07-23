@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:34:26 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/21 22:21:43 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/23 22:03:58 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	win_size(t_map *var_map)
 	int	y;
 
 	y = 0;
-	var_map->width = (int)ft_strlen(var_map->map[0]) - 1;
+	var_map->width = (int)ft_strlen(var_map->map[0]);
 	while (var_map->map[y])
 		y++;
 	var_map->height = y;

@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:58 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/21 21:24:03 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/23 22:25:36 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	run_mlx(t_map *var_map, t_sprites *var_sprites);
 int		handle_esc(int keycode, void *param);
 int		handle_exit(void *param);
 void	render_map(void *mlx, void *win, t_map *map, t_sprites *sprites);
+//checks.c
+int	check_walls(t_map *var_map);
+int	validate_map(t_map *var_map);
 
 # endif
 #endif
