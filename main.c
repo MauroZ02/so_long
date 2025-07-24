@@ -6,67 +6,11 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/23 22:24:30 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:14:44 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-char	**aux_readmap(int count_line, char **argv, t_map *var_map)
-{
-	int		fd;
-	int		i;
-	char	*line;
-	size_t	len;
-
-	i = 0;
-	var_map->map = ft_calloc(count_line + 1, sizeof(char *));
-	var_map->map_copy = ft_calloc(count_line + 1, sizeof(char *));
-	if (!var_map->map)
-		return (NULL);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (NULL); //hay que liberar la memoria reservada (ft_free)$
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		len = ft_strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			line[len - 1] = '\0';
-		var_map->map[i++] = line ;
-		// if(var_map->map[i][0] == '\n')
-		// return (NULL);//hay que liberar la memoria reservada
-	}
-	var_map->map[i] = NULL;
-	var_map->map_copy = var_map->map;
-	return (var_map->map);
-}
-
-char	**read_map(char **argv, t_map *var_map)
-{
-	char	*count_str;
-	int		i;
-	int		count_line;
-	int		fd; //numero de chars que lee read (bytes) por eso -1
-	count_line = 0;
-	i = ft_strlen(argv[1]);
-	if (argv[1][i - 1] == 'r' && argv[1][i - 2] == 'e' && argv[1][i - 3] == 'b'
-		&& argv[1][i - 4] == '.' && i > 4)
-	{
-		fd = open(argv[1], O_RDONLY);
-		if (fd < 0)
-			return (NULL); // si no entra al fd da -1
-		count_str = get_next_line(fd); //gnl solo lee primera linea
-		while (count_str)
-		{
-			free(count_str);
-			count_str = get_next_line(fd);
-			count_line++;
-		}
-		var_map->map = aux_readmap(count_line, argv, var_map);
-		return (var_map->map);
-	}
-	return (NULL);
-}
 
 void	printmap(t_map *var_map)
 {
@@ -88,27 +32,92 @@ void	printmap(t_map *var_map)
 	return ;
 }
 
+static void free_map(char **map)
+{
+	int i;
+
+	i = 0;
+	if (!map)
+		return;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
+// int	free_all(t_map *var_map, t_counts var_counts, t_sprites sprites)
+// {
+// 		free(var_map);
+// 		free(sprites);
+// 		free(var_counts);
+// }
+
 int	main(int argc, char **argv)
 {
 	t_map		*var_map;
 	t_sprites	*sprites;
+	t_counts	*var_counts;
+
+	if (argc != 2)
+		return (ft_printf("Too few arguments\n"));
 
 	var_map = ft_calloc(1, sizeof(t_map));
 	sprites = ft_calloc(1, sizeof(t_sprites));
+	var_counts = ft_calloc(1, sizeof(t_counts));
+	var_map->map = read_map(argv, var_map);
 
-	if (argc != 2)
+	if (!var_map->map)
+	{
+		ft_printf("Error in file\n");
+		free(var_map);
+		free(sprites);
+		free(var_counts);
 		return (1);
-	var_map->map_copy = read_map(argv, var_map);
-	if (argc != 2)
-		return (1); //como el .ber tiene que ser el primer arg nos percatamos 1º
+	}
+	var_map->map_copy = copy_map(var_map->map);
 	if (!validate_map(var_map))
-		return (ft_printf("Error validating map\n"));
-
+	{
+		ft_printf("Error validating map\n");
+		free_map(var_map->map);
+		free_map(var_map->map_copy);
+		free(var_map);
+		free(sprites);
+		free(var_counts);
+		return (1);
+	}
 	if (!check_walls(var_map))
-		return (ft_printf("Error checking walls\n"));
+	{
+		ft_printf("Error checking walls\n");
+		free_map(var_map->map);
+		free_map(var_map->map_copy);
+		free(var_map);
+		free(sprites);
+		free(var_counts);
+		return (1);
+	}
+	var_counts->P = 0;
+	var_counts->C = 0;
+	var_counts->E = 0;
+	if (!check_comp(var_map, var_counts))
+	{
+		ft_printf("Error with any component\n");
+		free_map(var_map->map);
+		free_map(var_map->map_copy);
+		free(var_map);
+		free(sprites);
+		free(var_counts);
+		return (1);
+	}
 	printmap(var_map);
 	win_size(var_map);
+	ft_printf("\nP:%d\n", var_counts->P);
+	ft_printf("C:%d\n", var_counts->C);
+	ft_printf("E:%d\n", var_counts->E);
 	run_mlx(var_map, sprites);
+	free_map(var_map->map);
+	free_map(var_map->map_copy);
 	free(var_map);
 	free(sprites);
 	return (0);

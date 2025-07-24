@@ -6,13 +6,15 @@ MLX = $(MLX_PATH)/libmlx.a
 LIBFT = $(LIBFT_PATH)/libft.a
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3 -I/usr/include -I$(MLX_PATH)
+# CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I/usr/include -I$(MLX_PATH)
+# LDFLAGS = -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror -g3 -I/usr/include -I$(MLX_PATH)
 
 SRC = main.c\
 	  render.c\
 	  graphics.c\
 	  checks.c\
+	  readmap.c\
 
 OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
