@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 22:23:24 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/24 21:05:22 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:13:43 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ int	check_comp(t_map *var_map, t_counts *var_counts)
 		while (var_map->map[y][x])
 		{
 			if (var_map->map[y][x] == 'P')
-				var_counts->P++;
+				var_counts->p++;
 			else if (var_map->map[y][x] == 'C')
-				var_counts->C++;
+				var_counts->c++;
 			else if (var_map->map[y][x] == 'E')
-				var_counts->E++;
+				var_counts->e++;
 			else if (var_map->map[y][x] != '1' && var_map->map[y][x] != '0')
 				return (0);
 			x++;
 		}
 		y++;
 	}
-	if (var_counts->P != 1 || var_counts->E != 1 || var_counts->C < 1)
+	if (var_counts->p != 1 || var_counts->e != 1 || var_counts->c < 1)
 		return (0);
 	return (1);
 }
@@ -92,6 +92,7 @@ int	validate_map(t_map *var_map)
 	}
 	return (1);
 }
+
 void	flood_fill(t_map *var_map, int x, int y)
 {
 	if (x < 0 || x >= var_map->width || y < 0 || y >= var_map->height)
@@ -100,7 +101,7 @@ void	flood_fill(t_map *var_map, int x, int y)
 		return ;
 	var_map->map_copy[y][x] = 'X';
 	flood_fill(var_map, x + 1, y);
-	flood_fill(var_map ,x - 1, y);
+	flood_fill(var_map, x - 1, y);
 	flood_fill(var_map, x, y - 1);
 	flood_fill(var_map, x, y + 1);
 }
@@ -135,13 +136,16 @@ int	check_path(t_map *var_map)
 	if (px < 0 || py < 0)
 		return (0);
 	flood_fill(var_map, px, py);
+	// write(1, "\nAFTER FLOOD FILL:\n", 20);
+	// print_map_copy(var_map);
 	y = 0;
 	while (var_map->map_copy[y])
 	{
 		x = 0;
 		while (var_map->map_copy[y][x])
 		{
-			if (var_map->map_copy[y][x] == 'C' || var_map->map_copy[y][x] == 'E')
+			if (var_map->map_copy[y][x] == 'C'
+			|| var_map->map_copy[y][x] == 'E')
 				return (0);
 			x++;
 		}

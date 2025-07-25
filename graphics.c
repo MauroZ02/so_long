@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:34:26 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/23 22:03:58 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/25 20:03:44 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	run_mlx(t_map *var_map, t_sprites *sprites)
 	sprites->exit = mlx_xpm_file_to_image(mlx, "sprites/exit_1.xpm", &width, &height);
 	sprites->box = mlx_xpm_file_to_image(mlx, "sprites/coin_1.xpm", &width, &height);
 	render_map(mlx, win, var_map, sprites);
-	mlx_key_hook(win, handle_esc, NULL); // cuando en la win se toque una tecla llama a handle_esc.
+	mlx_key_hook(win, handle_keys, NULL); // cuando en la win se toque una tecla llama a handle_esc.
 	mlx_hook(win, 17, 0, handle_exit, NULL); //hook dice "cuando ocurra algo llama a: funcion" - cuando en la win se toque la X (17) llama a handle_exit
 	mlx_loop(mlx);
 }

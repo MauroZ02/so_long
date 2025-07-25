@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:51:57 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/24 18:39:09 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/25 20:32:47 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	**aux_readmap(int count_line, char **argv, t_map *var_map)
 
 	i = 0;
 	var_map->map = ft_calloc(count_line + 1, sizeof(char *));
-	// var_map->map_copy = ft_calloc(count_line + 1, sizeof(char *));
 	if (!var_map->map)
 		return (NULL);
 	fd = open(argv[1], O_RDONLY);
@@ -32,7 +31,7 @@ char	**aux_readmap(int count_line, char **argv, t_map *var_map)
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
-		if(line[0] == '\n')
+		if (line[0] == '\n')
 			return (NULL);//hay que liberar la memoria reservada
 		var_map->map[i++] = line ;
 	}
@@ -95,4 +94,47 @@ char	**copy_map(char **map)
 	}
 	dup[i] = NULL;
 	return (dup);
+}
+
+// void	print_originalmap(t_map *var_map)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	y = 0;
+// 	while (var_map->map[y])
+// 	{
+// 		x = 0;
+// 		while (var_map->map[y][x])
+// 		{
+// 			//ft_printf("%c", var_map->map[y][x]);
+// 			x++;
+// 		}
+// 		//ft_printf("\n");
+// 		y++;
+// 	}
+// 	return ;
+// }
+
+void	loc_player(t_map *var_map, t_game *game)
+{
+	int	y;
+	int	x;
+
+	y  = 0;
+	while (var_map->map[y])
+	{
+		x = 0;
+		while (var_map->map[y][x])
+		{
+			if (var_map->map[y][x] == 'P')
+			{
+				game->player_x = x;
+				game->player_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
 }
