@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:58 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/25 22:05:33 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/27 00:46:45 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct sprites
 	void	*exit;
 }	t_sprites;
 
-
 typedef struct counts
 {
 	int	p;
@@ -66,22 +65,28 @@ typedef struct game
 int		check_walls(t_map *var_map);
 int		check_comp(t_map *var_map, t_counts *var_counts);
 int		validate_map(t_map *var_map);
-int		check_path(t_map *var_map);
 void	flood_fill(t_map *var_map, int x, int y);
+int		check_path(t_map *var_map);
 //graphics.c
 void	win_size(t_map *var_map);
-void	run_mlx(t_map *var_map, t_sprites *var_sprites);
+void	run_mlx(t_game *game);
 // readmap.c
-char	**read_map(char **argv, t_map *var_map);
 char	**aux_readmap(int count_line, char **argv, t_map *var_map);
+char	**read_map(char **argv, t_map *var_map);
 char	**copy_map(char **map);
 void	loc_player(t_map *var_map, t_game *game);
-//void	print_originalmap(t_map *var_map);
+int		find_player(t_map *var_map, int *px, int *py);
 //render.c
-int		handle_keys(int keycode, void *param);
-int		handle_exit(void *param);
-void	render_map(void *mlx, void *win, t_map *map, t_sprites *sprites);
+void	clean_up_and_exit(t_game *game);
 void	move_player(t_game *game, int new_x, int new_y);
+int		handle_keys(int keycode, void *param);
+int		handle_exit(t_game *game);
+void	render_map(t_game *g);
+//main.c
+void	clean_exit(char **map, int filled, char *line, int fd);
+void	free_map(char **map);
+void	cleanup_game(t_game *g);
+int		init_game(int argc, char **argv, t_game *g);
 
 # endif
 #endif

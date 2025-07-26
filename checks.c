@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 22:23:24 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/25 19:13:43 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/26 21:47:04 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,21 @@ int	check_walls(t_map *var_map)
 	width = (int)ft_strlen(var_map->map[0]);
 	x = 0;
 	while (x < width)
-	{
-		if (var_map->map[0][x] != '1')
+		if (var_map->map[0][x++] != '1')
 			return (0);
-		x++;
-	}
 	y = 1;
 	while (var_map->map[y] != NULL)
 	{
 		if (var_map->map[y + 1] == NULL)
 			break ;
-		if (var_map->map[y][0] != '1' || var_map->map[y][width - 1] != '1')
+		if (var_map->map[y][0] != '1' || var_map->map[y++][width - 1] != '1')
 			return (0);
-		y++;
 	}
 	height = y;
 	x = 0;
 	while (x < width)
-	{
-		if (var_map->map[height][x] != '1')
+		if (var_map->map[height][x++] != '1')
 			return (0);
-		x++;
-	}
 	return (1);
 }
 
@@ -108,36 +101,14 @@ void	flood_fill(t_map *var_map, int x, int y)
 
 int	check_path(t_map *var_map)
 {
-	int	y;
-	int	x;
-	int	py;
 	int	px;
+	int	py;
+	int	x;
+	int	y;
 
-	y = 0;
-	py = -1;
-	px = -1;
-	while (var_map->map_copy[y])
-	{
-		x = 0;
-		while (var_map->map_copy[y][x])
-		{
-			if (var_map->map_copy[y][x] == 'P')
-			{
-				px = x;
-				py = y;
-				break ;
-			}
-			x++;
-		}
-		if (px >= 0)
-			break ;
-		y++;
-	}
-	if (px < 0 || py < 0)
+	if (!find_player(var_map, &px, &py))
 		return (0);
 	flood_fill(var_map, px, py);
-	// write(1, "\nAFTER FLOOD FILL:\n", 20);
-	// print_map_copy(var_map);
 	y = 0;
 	while (var_map->map_copy[y])
 	{
@@ -145,7 +116,7 @@ int	check_path(t_map *var_map)
 		while (var_map->map_copy[y][x])
 		{
 			if (var_map->map_copy[y][x] == 'C'
-			|| var_map->map_copy[y][x] == 'E')
+				|| var_map->map_copy[y][x] == 'E')
 				return (0);
 			x++;
 		}
@@ -153,3 +124,86 @@ int	check_path(t_map *var_map)
 	}
 	return (1);
 }
+// int	check_path(t_map *var_map)
+// {
+// 	int	y;
+// 	int	x;
+// 	int	py;
+// 	int	px;
+
+// 	y = 0;
+// 	py = -1;
+// 	px = -1;
+// 	while (var_map->map_copy[y])
+// 	{
+// 		x = 0;
+// 		while (var_map->map_copy[y][x])
+// 		{
+// 			if (var_map->map_copy[y][x] == 'P')
+// 			{
+// 				px = x;
+// 				py = y;
+// 				break ;
+// 			}
+// 			x++;
+// 		}
+// 		if (px >= 0)
+// 			break ;
+// 		y++;
+// 	}
+// 	if (px < 0 || py < 0)
+// 		return (0);
+// 	flood_fill(var_map, px, py);
+// 	y = 0;
+// 	while (var_map->map_copy[y])
+// 	{
+// 		x = 0;
+// 		while (var_map->map_copy[y][x])
+// 		{
+// 			if (var_map->map_copy[y][x] == 'C'
+// 			|| var_map->map_copy[y][x++] == 'E')
+// 				return (0);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (1);
+// }
+
+// int	check_path(t_map *var_map)
+// {
+// 	int	y;
+// 	int	x;
+// 	int	py;
+// 	int	px;
+
+// 	y = -1;
+// 	py = -1;
+// 	px = -1;
+// 	while (var_map->map_copy[++y])
+// 	{
+// 		x = -1;
+// 		while (var_map->map_copy[y][++x])
+// 			if (var_map->map_copy[y][x] == 'P')
+// 			{
+// 				px = x;
+// 				py = y;
+// 				break ;
+// 			}
+// 		if (px >= 0)
+// 			break ;
+// 	}
+// 	if (px < 0 || py < 0)
+// 		return (0);
+// 	flood_fill(var_map, px, py);
+// 	y = -1;
+// 	while (var_map->map_copy[++y])
+// 	{
+// 		x = -1;
+// 		while (var_map->map_copy[y][++x])
+// 			if (var_map->map_copy[y][x] == 'C'
+// 			|| var_map->map_copy[y][x++] == 'E')
+// 				return (0);
+// 	}
+// 	return (1);
+// }
