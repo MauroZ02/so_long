@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:51:57 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/26 23:51:31 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:13:59 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,17 @@ char	**aux_readmap(int count_line, char **argv, t_map *var_map)
 		return (NULL);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-	{
-		free(var_map->map);
-		return (NULL);
-	}
+		return (free(var_map->map), NULL);
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line[ft_strlen(line) - 1] > 0 && line[ft_strlen(line) - 1] == '\n')
+		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		var_map->map[i++] = line;
 		line = get_next_line(fd);
 	}
+	if (i == 0)
+		return (free(var_map->map), var_map->map = NULL, NULL);
 	var_map->map[i] = NULL;
 	close(fd);
 	return (var_map->map);

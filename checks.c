@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 22:23:24 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/26 21:47:04 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:08:19 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	validate_map(t_map *var_map)
 	size_t	gen_len;
 
 	y = 0;
-	if (!var_map->map[0])
+	if (!var_map->map[0] || !var_map->map)
 		return (0);
 	gen_len = ft_strlen(var_map->map[0]);
 	while (var_map->map[y])
@@ -83,6 +83,10 @@ int	validate_map(t_map *var_map)
 			return (0);
 		y++;
 	}
+	if (y < 5 || gen_len < 3)
+		return (0);
+	if (y > MAX_MAP_HEIGHT || gen_len > MAX_MAP_WIDTH)
+		return (0);
 	return (1);
 }
 
@@ -124,6 +128,7 @@ int	check_path(t_map *var_map)
 	}
 	return (1);
 }
+
 // int	check_path(t_map *var_map)
 // {
 // 	int	y;

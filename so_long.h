@@ -6,14 +6,16 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:58 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/27 00:46:45 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:47:01 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # ifndef SIZE
-#  define SIZE 32
+#  define SIZE 30
+#  define MAX_MAP_HEIGHT 200
+#  define MAX_MAP_WIDTH 200
 
 #  include <unistd.h>
 #  include <stdio.h>
@@ -48,6 +50,7 @@ typedef struct counts
 	int	p;
 	int	e;
 	int	c;
+	int	collected;
 }	t_counts;
 
 typedef struct game
@@ -83,7 +86,6 @@ int		handle_keys(int keycode, void *param);
 int		handle_exit(t_game *game);
 void	render_map(t_game *g);
 //main.c
-void	clean_exit(char **map, int filled, char *line, int fd);
 void	free_map(char **map);
 void	cleanup_game(t_game *g);
 int		init_game(int argc, char **argv, t_game *g);

@@ -6,23 +6,11 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/27 01:40:56 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:52:32 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	clean_exit(char **map, int filled, char *line, int fd)
-{
-	int	j;
-
-	j = 0;
-	while (j < filled)
-		free(map[j++]);
-	free(map);
-	free(line);
-	close(fd);
-}
 
 void	free_map(char **map)
 {
@@ -61,6 +49,9 @@ int	init_game(int argc, char **argv, t_game *g)
 	if (!g->map || !g->sprites || !g->counts)
 		return (perror("malloc"), cleanup_game(g), 0);
 	g->map->map = read_map(argv, g->map);
+	g->map->map = read_map(argv, g->map);
+	if (!g->map->map)
+		return (ft_printf("Empty map\n"), cleanup_game(g), 0);
 	g->map->map_copy = copy_map(g->map->map);
 	if (!g->map->map_copy)
 		return (perror("malloc"), cleanup_game(g), 0);
@@ -96,6 +87,17 @@ int	main(int argc, char **argv)
 // 	t_counts		counts;
 // 	t_game			game;
 
+// void	clean_exit(char **map, int filled, char *line, int fd)
+// {
+// 	int	j;
+
+// 	j = 0;
+// 	while (j < filled)
+// 		free(map[j++]);
+// 	free(map);
+// 	free(line);
+// 	close(fd);
+// }
 // 	if (argc != 2)
 // 		return (ft_printf("Too few arguments\n"), 1);
 // 	m = ft_calloc(1, sizeof (*m));

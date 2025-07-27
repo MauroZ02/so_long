@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 18:47:21 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/27 01:42:47 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:56:11 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,18 @@ void	clean_up_and_exit(t_game *game)
 
 void	move_player(t_game *game, int new_x, int new_y)
 {
-	char	target;
-
-	target = game->map->map[new_y][new_x];
 	if (game->map->map[new_y][new_x] == '1')
 		return ;
 	if (game->map->map[new_y][new_x] == 'C')
 	{
 		game->counts->c--;
+		game->counts->collected++;
 		game->player_x = new_x;
 		game->player_y = new_y;
 		game->moves++;
 		game->map->map[new_y][new_x] = '0';
 	}
-	if (target == 'E')
+	if (game->map->map[new_y][new_x] == 'E')
 	{
 		if (game->counts->c == 0)
 			clean_up_and_exit(game);
