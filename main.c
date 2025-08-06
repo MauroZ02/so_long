@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/08/06 16:08:55 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:58:15 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	cleanup_game(t_game *g)
 	}
 	free(g->sprites);
 	free(g->counts);
+	
 }
 
 int	init_game(int argc, char **argv, t_game *g)

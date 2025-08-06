@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 18:34:26 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/27 01:40:36 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:18:57 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	run_mlx(t_game *game)
 			&tex_w, &tex_h);
 	render_map(game);
 	mlx_key_hook(game->win, handle_keys, game);
-	mlx_hook(game->win, 17, 0, handle_exit, NULL);
+	mlx_hook(game->win, 17, 0, handle_exit, game);
 	mlx_loop(game->mlx);
 }
 
