@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:40 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/27 17:52:32 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:08:55 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	init_game(int argc, char **argv, t_game *g)
 	g->counts = ft_calloc(1, sizeof (*g->counts));
 	if (!g->map || !g->sprites || !g->counts)
 		return (perror("malloc"), cleanup_game(g), 0);
-	g->map->map = read_map(argv, g->map);
 	g->map->map = read_map(argv, g->map);
 	if (!g->map->map)
 		return (ft_printf("Empty map\n"), cleanup_game(g), 0);

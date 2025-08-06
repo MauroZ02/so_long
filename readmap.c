@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:51:57 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/27 17:13:59 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:23:22 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	**read_map(char **argv, t_map *var_map)
 			count_line++;
 		}
 		var_map->map = aux_readmap(count_line, argv, var_map);
+		get_next_line(-1);
 		return (var_map->map);
 	}
 	return (NULL);
