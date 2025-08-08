@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 17:51:57 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/08/06 16:23:22 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/09 00:50:45 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,23 +146,3 @@ int	find_player(t_map *var_map, int *px, int *py)
 	}
 	return (0);
 }
-
-// void	print_originalmap(t_map *var_map)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	y = 0;
-// 	while (var_map->map[y])
-// 	{
-// 		x = 0;
-// 		while (var_map->map[y][x])
-// 		{
-// 			//ft_printf("%c", var_map->map[y][x]);
-// 			x++;
-// 		}
-// 		//ft_printf("\n");
-// 		y++;
-// 	}
-// 	return ;
-// }

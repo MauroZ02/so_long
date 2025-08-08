@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 18:47:21 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/08/06 20:06:02 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/09 00:51:54 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,52 +114,3 @@ void	render_map(t_game *g)
 	mlx_put_image_to_window(g->mlx, g->win, g->sprites->player,
 		g->player_x * SIZE, g->player_y * SIZE);
 }
-// void	clean_up_and_exit(t_game *game)
-// {
-// 	free_map(game->map->map_copy);
-// 	free_map(game->map->map);
-// 	free(game->map);
-// 	free(game->sprites);
-// 	free(game->counts);
-// 	mlx_destroy_window(game->mlx, game->win);
-// 	exit(0);
-// }
-// int	handle_exit(void *param)
-// {
-// 	(void)param;
-// 	exit (0);
-// 	return (0);
-// }
-
-// void	render_map(void *mlx, void *win, t_map *map, t_sprites *sprites)
-// {
-// 	int		y;
-// 	int		x;
-
-// 	y = 0;
-// 	x = 0;
-// 	while (map->map_copy[y])
-// 	{
-// 		while (map->map_copy[y][x])
-// 		{
-// 			if (map->map_copy[y][x] == '1')
-// 				mlx_put_image_to_window(mlx, win, sprites->wall, x * SIZE, y * 
-//SIZE);
-// 			else if (map->map_copy[y][x] == '0')
-// 				mlx_put_image_to_window(mlx, win, sprites->floor, x * SIZE, y * 
-//SIZE);
-// 			else if (map->map_copy[y][x] == 'P')
-// 				mlx_put_image_to_window(mlx, win, sprites->player, x * SIZE, y 
-//* SIZE);
-// 			else if (map->map_copy[y][x] == 'C')
-// 				mlx_put_image_to_window(mlx, win, sprites->box, x * SIZE, y *
-// SIZE);
-// 			else if (map->map_copy[y][x] == 'E')
-// 				mlx_put_image_to_window(mlx, win, sprites->exit, x * SIZE, y * 
-//SIZE);
-// 			x++;
-// 		}
-// 		x = 0;
-// 		y++;
-// 	}
-// }

@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 22:31:58 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/08/06 17:08:32 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/08 21:12:34 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,14 @@
 
 typedef struct map
 {
-	char	**map;		//DYNAMIC 	ALLOC
-	char	**map_copy;	//DYNAMIC	ALLOC
+	char	**map;
+	char	**map_copy;
 	int		height;
 	int		width;
 	int		player_x;
 	int		player_y;
 }	t_map;
 
-//DYNAMIC ALLOC
 typedef struct sprites
 {
 	void	*wall;
@@ -46,7 +45,6 @@ typedef struct sprites
 	void	*exit;
 }	t_sprites;
 
-//DYNAMIC ALLOC
 typedef struct counts
 {
 	int	p;
@@ -57,15 +55,16 @@ typedef struct counts
 
 typedef struct game
 {
-	t_map		*map;		//ALLOC DYNAMIC
-	t_sprites	*sprites;	//ALLOC DYNAMIC
-	t_counts	*counts;	//ALLOC DYNAMIC
-	void		*mlx;		//ALLOC DYNAMIC
-	void		*win;		//ALLOC DYNAMIC
+	t_map		*map;
+	t_sprites	*sprites;
+	t_counts	*counts;
+	void		*mlx;
+	void		*win;
 	int			player_x;
 	int			player_y;
 	int			moves;
 }	t_game;
+
 //checks.c
 int		check_walls(t_map *var_map);
 int		check_comp(t_map *var_map, t_counts *var_counts);
