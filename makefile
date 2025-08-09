@@ -6,16 +6,18 @@ MLX = $(MLX_PATH)/libmlx.a
 LIBFT = $(LIBFT_PATH)/libft.a
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -g3 -I/usr/include -I$(MLX_PATH)
-CFLAGS = -Wall -Wextra -Werror -g3 -I/usr/include -I$(MLX_PATH) -O0
+CFLAGS = -Wall -Wextra -Werror -g3 -I/usr/include -I$(MLX_PATH)
+# CFLAGS = -Wall -Wextra -Werror -O0 -g3 -I/usr/include -I$(MLX_PATH)
 # CFLAGS += -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
 # CFLAGS = -Wall -Wextra -Werror -g -O0
+# CFLAGS = -Wall -Wextra -Werror -O0 -g3
 
 SRC = main.c\
-	  render.c\
-	  graphics.c\
 	  checks.c\
-	  readmap.c\
+	  game_init.c\
+	  graphics.c\
+	  map_reading.c\
+	  render.c\
 
 OBJ = $(SRC:%.c=%.o)
 all: $(NAME)

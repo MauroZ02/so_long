@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 18:47:21 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/08/09 13:51:50 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:09:03 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ int	handle_keys(int keycode, void *param)
 	new_y = 0;
 	new_x = 0;
 	game = (t_game *)param;
-	if (keycode == 65361 || keycode == 97)
+	if (keycode == LEFT_ARROW || keycode == A_KEY)
 		new_x = new_x - 1;
-	else if (keycode == 65363 || keycode == 100)
+	else if (keycode == RIGHT_ARROW || keycode == D_KEY)
 		new_x = new_x + 1;
-	else if (keycode == 65362 || keycode == 119)
+	else if (keycode == UP_ARROW || keycode == W_KEY)
 		new_y = new_y - 1;
-	else if (keycode == 65364 || keycode == 115)
+	else if (keycode == DOWN_ARROW || keycode == S_KEY)
 		new_y = new_y + 1;
-	else if (keycode == 65307)
+	else if (keycode == ESC_KEY)
 		clean_up_and_exit(game);
 	else
 		return (0);
