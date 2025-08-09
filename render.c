@@ -6,28 +6,28 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 18:47:21 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/08/09 00:51:54 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/09 13:51:50 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void clean_up_and_exit(t_game *game)
+void	clean_up_and_exit(t_game *game)
 {
-    mlx_destroy_image(game->mlx, game->sprites->wall);
-    mlx_destroy_image(game->mlx, game->sprites->floor);
-    mlx_destroy_image(game->mlx, game->sprites->player);
-    mlx_destroy_image(game->mlx, game->sprites->exit);
-    mlx_destroy_image(game->mlx, game->sprites->box);
-    mlx_destroy_window(game->mlx, game->win);
-    mlx_destroy_display(game->mlx);
-    free(game->mlx);
-    free(game->sprites);
-    free_map(game->map->map_copy);
-    free_map(game->map->map);
-    free(game->map);
-    free(game->counts);
-    exit(0);
+	mlx_destroy_image(game->mlx, game->sprites->wall);
+	mlx_destroy_image(game->mlx, game->sprites->floor);
+	mlx_destroy_image(game->mlx, game->sprites->player);
+	mlx_destroy_image(game->mlx, game->sprites->exit);
+	mlx_destroy_image(game->mlx, game->sprites->box);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free(game->sprites);
+	free_map(game->map->map_copy);
+	free_map(game->map->map);
+	free(game->map);
+	free(game->counts);
+	exit(0);
 }
 
 void	move_player(t_game *game, int new_x, int new_y)

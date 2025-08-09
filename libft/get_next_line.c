@@ -6,7 +6,7 @@
 /*   By: mzangaro <mzangaro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 19:06:59 by mzangaro          #+#    #+#             */
-/*   Updated: 2025/07/24 18:58:36 by mzangaro         ###   ########.fr       */
+/*   Updated: 2025/08/06 16:14:17 by mzangaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2)
 		j++;
 	join = ft_calloc_gnl(i + j + 1, sizeof(char));
 	if (!join)
-		return (NULL);
+		return (free((char *)s1), NULL);
 	ft_strlcpy_gnl(join, (char *)s1, i + 1);
 	ft_strlcat_gnl(join, s2, i + j + 1);
 	return (join);
@@ -44,7 +44,7 @@ char	*read_till_nl(int fd, char *rest)
 
 	temp_buffer = ft_calloc_gnl(BUFFER_SIZE + 1, sizeof(char));
 	if (!temp_buffer)
-		return (NULL);
+		return (free(rest), NULL);
 	bytes_read = 1;
 	while (!ft_strchr_gnl(rest, '\n') && bytes_read > 0)
 	{
